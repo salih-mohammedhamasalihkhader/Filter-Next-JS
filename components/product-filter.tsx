@@ -11,7 +11,7 @@ import {
 
 function ProductFilter() {
   const [search, setsearch] = useQueryState("search", { defaultValue: "" }); // to string filter
-  const [perpage, setPerpage] = useQueryState(
+  const [perpage, setperpage] = useQueryState(
     "perpage",
     parseAsInteger.withDefault(10),
   ); // to integer filter
@@ -31,7 +31,7 @@ function ProductFilter() {
       <div>
         <Select
           value={perpage.toString()}
-          onValueChange={(Value) => setPerpage(Number(Value))}
+          onValueChange={(Value) => setperpage(Number(Value))}
         >
           <SelectTrigger>
             <SelectValue placeholder="Per Page" />

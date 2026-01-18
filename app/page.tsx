@@ -12,10 +12,9 @@ async function page({ searchParams }: PageProps) {
   const { search, perpage } = await loadSearchParams(searchParams);
 
   const products = await gerProducts({ search, perpage });
-  console.log(products);
   return (
     <main className="flex flex-col gap-10 justify-center max-w-6xl mx-auto px-4">
-      <h1>Filter Next.js</h1>
+      <h1 className="text-2xl">Filter Next.js</h1>
       <ProductFilter />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (

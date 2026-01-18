@@ -13,7 +13,7 @@ export async function gerProducts({
 }: GetProductParams): Promise<Product[]> {
   try {
     const response = await fetch(
-      `https://api.escuelajs.co/api/v1/products/?title=${search}&limit${perpage}`,
+      `https://api.escuelajs.co/api/v1/products/?title=${search}&offset=0&limit=${perpage}`,
     );
     const data = await response.json();
     return data;
