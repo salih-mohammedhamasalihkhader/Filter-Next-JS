@@ -9,12 +9,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function ProductFilter() {
+interface ProductFilterProps {
+  refechProducts: () => Promise<void>;
+}
+
+function ProductFilter({ refechProducts }: ProductFilterProps) {
   const [search, setsearch] = useQueryState("search", { defaultValue: "" }); // to string filter
   const [perpage, setperpage] = useQueryState(
     "perpage",
     parseAsInteger.withDefault(10),
   ); // to integer filter
+
+  const handleSearch = (value: string) => {
+    setsearch(value);
+    setTimeout(() => {
+      refechProducts();
+    }, 300);
+  };
+  const handlePerPage = (value: string) => {
+    setperpage(Number(value));
+    setTimeout(() => {
+      refechProducts();
+    }, 300);
+  };
 
   return (
     <div className="flex items-center justify-between">
@@ -24,14 +41,14 @@ function ProductFilter() {
           placeholder="search"
           value={search}
           onChange={(e) => {
-            setsearch(e.target.value);
+            handleSearch(e.target.value);
           }}
         />
       </div>
       <div>
         <Select
           value={perpage.toString()}
-          onValueChange={(Value) => setperpage(Number(Value))}
+          onValueChange={(Value) => handlePerPage(Value)}
         >
           <SelectTrigger>
             <SelectValue placeholder="Per Page" />
